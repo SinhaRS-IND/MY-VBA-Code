@@ -1,0 +1,15 @@
+Function SingleCellValue(Lookupvalue As String, LookupRange As Range, ColumnNumber As Integer, Char As String)
+
+Dim i As Long
+Dim xRet As String
+For i = 1 To LookupRange.Columns(1).Cells.Count
+    If LookupRange.Cells(i, 1) = Lookupvalue Then
+        If xRet = "" Then
+            xRet = LookupRange.Cells(i, ColumnNumber) & Char
+        Else
+            xRet = xRet & "" & LookupRange.Cells(i, ColumnNumber) & Char
+        End If
+    End If
+Next
+SingleCellValue = Left(xRet, Len(xRet) - 1)
+End Function
