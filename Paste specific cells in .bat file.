@@ -1,0 +1,22 @@
+Sub Export2BAT()
+
+    Dim strFileName As String
+
+    strFileName = InputBox("Enter Name Of New Workbok", "Workbook Name")
+    If Trim(strFileName) = vbNullString Then Exit Sub
+
+    Application.ScreenUpdating = False
+    Application.DisplayAlerts = False
+
+    Range("A2:D16").Copy
+    Sheets.Add.Range("A1").PasteSpecial xlPasteAll
+    Application.CutCopyMode = False
+    ActiveSheet.UsedRange.EntireColumn.AutoFit
+    ActiveSheet.Move
+    ActiveWorkbook.SaveAs "Your Path Here\" & strFileName & ".bat", xlOpenXMLWorkbookMacroEnabled
+    ActiveWorkbook.Close False
+
+    Application.DisplayAlerts = True
+    Application.ScreenUpdating = True
+
+End Sub
