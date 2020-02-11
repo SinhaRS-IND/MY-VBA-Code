@@ -1,0 +1,14 @@
+Sub CompareSheets()
+
+
+Dim i As Long, f As Variant
+
+With Worksheets(1)
+    For i = 1 To .Cells(.Rows.Count, "A").End(xlUp).Row
+        f = Application.Match(.Cells(i, "A").Value2, Worksheets(2).Columns("A"), 0)
+        If Not IsError(f) Then
+            .Cells(i, "A").Interior.ColorIndex = 4
+        End If
+    Next i
+End With
+End Sub
