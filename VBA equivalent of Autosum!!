@@ -1,0 +1,8 @@
+Sub AutoSumRange()
+ Dim lCell As Range
+ Set lCell = Range("A1").End(xlDown).Offset(1, 0) 
+
+ With Sheet1
+ lCell.Formula = WorksheetFunction.Sum(Range(Range("A1"), Range("A1").End(xlDown)))
+ End With
+End Sub
