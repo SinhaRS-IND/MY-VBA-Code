@@ -1,0 +1,43 @@
+Option Explicit
+Function expandMonths(S As String) As String
+    Dim V As Variant, W As Variant, X As Variant
+    Dim dD As Object
+    Dim I As Long
+    Dim DT1 As Long, DT2 As Long
+    Dim arrMonths() As String
+
+Set dD = CreateObject("Scripting.Dictionary")
+'Is there a range
+V = Split(S, ",")
+For Each W In V
+
+        'Is it a range
+        If InStr(1, Trim(W), " to ", vbTextCompare) = 0 Then
+
+            'No it is not
+            DT1 = Month(DateValue(Trim(W) & " 1, 2000"))
+            dD.Add DT1, DT1
+        Else
+
+            'Yes, it is a range
+            X = Split(Trim(W))
+            DT1 = Month(DateValue(X(0) & " 1, 2000"))
+            DT2 = Month(DateValue(X(2) & " 1, 2000"))
+            For I = DT1 To DT2
+                dD.Add I, I
+            Next I
+        End If
+Next W
+
+ReDim arrMonths(1 To dD.Count)
+I = 0
+For Each V In dD.keys
+    I = I + 1
+
+    'Convert month numbers to text
+    arrMonths(I) = Format(DateSerial(2000, V, 1), "mmm")
+Next V
+
+expandMonths = Join(arrMonths, ", ")
+
+End Function
