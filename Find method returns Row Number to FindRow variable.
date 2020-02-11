@@ -1,0 +1,13 @@
+Sub FindRowNubmer()
+
+Dim FindRow As Range
+Set FindRow = Range("A:K").Find(What:="MJ", _
+               LookIn:=xlValues, _
+                LookAt:=xlWhole, _
+                 SearchOrder:=xlByRows, _
+                  MatchCase:=False)
+
+    Range("A1").Offset(FindRow.Row - 1, 1).Select
+    Range("A1").Offset(FindRow.Row + 1, 1).Value = "Found MJ in Row: " & FindRow.Row
+
+End Sub
