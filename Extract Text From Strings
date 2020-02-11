@@ -1,0 +1,15 @@
+Function ExtractTextOnly(pWorkRng As Range) As String
+
+Dim xValue As String
+Dim OutValue As String
+
+xValue = pWorkRng.Value
+
+For xIndex = 1 To VBA.Len(xValue)
+    If Not VBA.IsNumeric(VBA.Mid(xValue, xIndex, 1)) Then
+        OutValue = OutValue & VBA.Mid(xValue, xIndex, 1)
+    End If
+Next
+ExtractTextOnly = OutValue
+
+End Function
