@@ -1,0 +1,16 @@
+Sub QuickSearch()
+
+    Dim ws1 As Worksheet
+    Dim ws2 As Worksheet
+    Dim rng1 As Range
+
+    Set ws1 = Sheets(1)
+    Set ws2 = Sheets(2)
+    Set rng1 = ws2.Range(ws2.[a2], ws2.Cells(Rows.Count, "A").End(xlUp))
+
+    With rng1.Offset(0, 1)
+        .FormulaR1C1 = "=IFERROR(VLOOKUP(RC[-1],Sheet10!C[-1]:C,1,FALSE),"""")"
+        .Value = .Value
+    End With
+
+End Sub
