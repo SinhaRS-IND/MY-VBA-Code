@@ -1,0 +1,21 @@
+Sub test1()
+
+Dim i, k As Long
+Dim dForm As UserForm
+Dim ctl As MSForms.Control
+Dim c()
+Dim fmBCMcontact    
+
+    Set dForm = ThisWorkbook.VBProject.VBComponents("fmBCMcontact").Designer
+  i = 0
+  For Each ctl In fmBCMcontact.Controls
+    ReDim Preserve c(i)
+    c(i) = ctl.Name
+    i = i + 1
+    ReDim Preserve c(i)
+    c(i) = TypeName(ctl)
+    Sheets("TabResult").Cells(i, 1).Value = c(i)   
+    i = i + 1
+  Next
+
+End Sub
