@@ -1,0 +1,10 @@
+Sub ChangePivotSourceData()
+
+Dim pt As PivotTable
+
+For Each pt In ActiveWorkbook.Worksheets("Sheet1").PivotTables
+         pt.ChangePivotCache ActiveWorkbook.PivotCaches.Create _
+            (SourceType:=xlDatabase, SourceData:="MyData")
+Next pt
+
+End Sub
