@@ -1,0 +1,20 @@
+Private Sub CommandButton1_Click()
+
+ Dim rng As Range
+ Set rng = ActiveSheet.ListObjects("Table1").Range
+
+ Dim LastRow As Long
+
+ LastRow = rng.Find(What:="*", _
+ After:=rng.Cells(1), _
+ Lookat:=xlPart, _
+ LookIn:=xlFormulas, _
+ SearchOrder:=xlByRows, _
+ SearchDirection:=xlPrevious, _
+ MatchCase:=False).Row
+
+ rng.Parent.Cells(LastRow + 1, 1).Value = TextBox1.Value
+ rng.Parent.Cells(LastRow + 1, 2).Value = TextBox2.Value
+
+
+End Sub
