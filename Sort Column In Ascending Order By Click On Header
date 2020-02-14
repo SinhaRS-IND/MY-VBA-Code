@@ -1,0 +1,7 @@
+Public blnToggle As Boolean
+
+Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+If Target.Row <> 1 Then Exit Sub
+Rows("2:65536").Sort Key1:=Cells(2, Target.Column), _
+Order1:=xlAscending, Header:=xlNo
+End Sub
