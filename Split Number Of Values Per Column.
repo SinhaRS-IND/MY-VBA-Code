@@ -1,0 +1,45 @@
+Sub Splitvaluepercolumn()
+
+    Dim xRg As Range
+    Dim xOutRg As Range
+    Dim xCell As Range
+    Dim xTxt As String
+    Dim xOutArr As Variant
+    Dim I As Long, K As Long
+    
+    On Error Resume Next
+    
+    xTxt = ActiveWindow.RangeSelection.Address
+Sel:
+    Set xRg = Nothing
+    Set xRg = Application.InputBox("Select data range:", "Grouping Data", xTxt, , , , , 8)
+    
+    If xRg Is Nothing Then Exit Sub
+    If xRg.Areas.Count > 1 Then
+        MsgBox "Doesn't supports multiple column/selection, select again", vbInformation, "Grouping Data"
+        GoTo Sel
+    End If
+    
+    If xRg.Columns.Count > 1 Then
+        MsgBox "Doesn't supports multiple column/selection, select again", vbInformation, "Grouping Data"
+        GoTo Sel
+    End If
+    
+    Set xOutRg = Application.InputBox("Select one cell to put result:", "Grouping Data", , , , , , 8)
+    
+    If xOutRg Is Nothing Then Exit Sub
+    I = Application.InputBox("Write number of values per column:", "Grouping Data", , , , , , 1)
+    
+    If I < 1 Then
+        MsgBox "Incorrect enter", vbInformation, "Grouping Data"
+        Exit Sub
+    End If
+    
+    ReDim xOutArr(1 To I, 1 To Int(xRg.Rows.Count / I) + 1)
+    
+    For K = 0 To xRg.Rows.Count - 1
+      xOutArr(1 + (K Mod I), 1 + Int(K / I)) = xRg.Cells(K + 1)
+    Next
+    xOutRg.Range("A1").Resize(I, UBound(xOutArr, 2)) = xOutArr
+    
+End Sub
